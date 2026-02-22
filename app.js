@@ -28,7 +28,17 @@ app.get('/api/info', (req, res) => {
     app: 'my-aws-webapp',
     version: '1.0.0',
     environment: process.env.ENVIRONMENT || 'development',
-    timestamp: new Date()
+    timestamp: new Date(),
+    buildId: process.env.BUILD_ID || 'local'
+  });
+});
+
+// Quick test endpoint to verify deploys
+app.get('/api/test', (req, res) => {
+  res.json({
+    ok: true,
+    message: 'Test endpoint working',
+    time: new Date()
   });
 });
 
