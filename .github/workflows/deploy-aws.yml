@@ -32,10 +32,9 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: 'package-lock.json'  # Repo root
     
     - name: Install dependencies
-      run: npm ci
+      run: npm install
     
     - name: Run tests
       run: npm test
