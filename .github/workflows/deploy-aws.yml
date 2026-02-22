@@ -3,12 +3,8 @@ name: Deploy to AWS ECS
 on:
   push:
     branches: [master]
-    paths:
-      - 'project-2-cicd/**'  # Only run when project-2-cicd changes
   pull_request:
     branches: [master]
-    paths:
-      - 'project-2-cicd/**'
   workflow_dispatch:  # Manual triggering
 
 env:
@@ -25,7 +21,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: ./project-2-cicd  # Set working directory for all steps
+        working-directory: .  # Repo root
     
     steps:
     - name: Checkout code
@@ -36,7 +32,7 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: './project-2-cicd/package-lock.json'  # Specify path for cache
+        cache-dependency-path: 'package-lock.json'  # Repo root
     
     - name: Install dependencies
       run: npm ci
@@ -57,7 +53,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: ./project-2-cicd
+        working-directory: .
     
     steps:
     - name: Checkout code
@@ -100,7 +96,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ./project-2-cicd/task-definition.json  # Specify full path
+        task-definition: ./task-definition.json  # Repo root
         container-name: webapp  # Make sure this matches your container name in task definition
         image: ${{ steps.build-image.outputs.image }}
     
