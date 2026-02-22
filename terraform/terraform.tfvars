@@ -1,0 +1,5 @@
+cluster_name      = "webapp-cicd-cluster"
+service_name      = "webapp-cicd-service"
+task_family       = "webapp-cicd-task"
+ecr_repository    = "my-webapp"
+github_user_name  = "github-actions-user"
